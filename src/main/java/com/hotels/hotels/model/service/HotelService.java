@@ -13,7 +13,7 @@ public interface HotelService {
     Optional<Hotel> getHotel(Long id);
 
     List<HotelShortInfo> getHotelsByParameters(Optional<String> name, Optional<String> brand, Optional<String> city,
-            Optional<String> country, Optional<String> amenities);
+            Optional<String> country, Optional<String[]> amenities);
 
     HotelShortInfo createHotel(Hotel hotel);
 
