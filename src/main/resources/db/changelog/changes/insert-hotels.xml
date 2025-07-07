@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="master" id="2">
+        <insert tableName="hotels">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="DoubleTree by Hilton Minsk"/>
+            <column name="description" value="The DoubleTree by Hilton Hotel Minsk offers 193 luxurious rooms in the Belorussian capital and stunning views of Minsk city from the hotel's 20th floor ..."/>
+            <column name="brand" value="Hilton"/>
+            <column name="house_number" valueNumeric="9"/>
+            <column name="street" value="Pobediteley Avenue"/>
+            <column name="city" value="Minsk"/>
+            <column name="country" value="Belarus"/>
+            <column name="postCode" value="220004"/>
+            <column name="phone" value="+375 17 309-80-00"/>
+            <column name="email" value="doubletreeminsk.info@hilton.com"/>
+            <column name="check_in" value="14:00:00"/>
+            <column name="check_out" value="12:00:00"/>
+            <column name="amenities" value="Free parking,Free WiFi,Non-smoking rooms,Concierge,On-site restaurant,Fitness center,Pet-friendly rooms,Room service,Business center,Meeting rooms"/>
+        </insert>
+        <insert tableName="hotels">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="President Hotel"/>
+            <column name="description" value="Elegant 5-star hotel in the heart of Minsk, offering refined rooms, a spa, and conference facilities."/>
+            <column name="brand" value="President"/>
+            <column name="house_number" valueNumeric="18"/>
+            <column name="street" value="vulica Kirava"/>
+            <column name="city" value="Minsk"/>
+            <column name="country" value="Belarus"/>
+            <column name="postCode" value="220030"/>
+            <column name="phone" value="+375 17 229-70-00"/>
+            <column name="email" value="info@president-hotel.by"/>
+            <column name="check_in" value="14:00:00"/>
+            <column name="check_out" value="12:00:00"/>
+            <column name="amenities" value="Spa,Fitness center,Free WiFi,Restaurant,Conference rooms,Room service"/>
+        </insert>
+        <insert tableName="hotels">
+            <column name="id" valueNumeric="3"/>
+            <column name="name" value="Beijing Hotel Minsk"/>
+            <column name="description" value="Luxury hotel with Chinese-inspired design, located near the Svisloch River and city center."/>
+            <column name="brand" value="Beijing"/>
+            <column name="house_number" valueNumeric="36"/>
+            <column name="street" value="Čyrvonaarmiejskaja Street"/>
+            <column name="city" value="Minsk"/>
+            <column name="country" value="Belarus"/>
+            <column name="postCode" value="220030"/>
+            <column name="phone" value="+375 17 329-77-77"/>
+            <column name="email" value="info@beijinghotelminsk.com"/>
+            <column name="check_in" value="14:00:00"/>
+            <column name="check_out" value="12:00:00"/>
+            <column name="amenities" value="Indoor pool,Spa,Free parking,Chinese restaurant,Fitness center,Business lounge"/>
+        </insert>
+        <insert tableName="hotels">
+            <column name="id" valueNumeric="4"/>
+            <column name="name" value="Hotel Europe"/>
+            <column name="description" value="Historic 5-star hotel with classic European charm, located in the heart of Minsk's old town."/>
+            <column name="brand" value="Europe"/>
+            <column name="house_number" valueNumeric="28"/>
+            <column name="street" value="Internatsional'naya Street"/>
+            <column name="city" value="Minsk"/>
+            <column name="country" value="Belarus"/>
+            <column name="postCode" value="220030"/>
+            <column name="phone" value="+375 17 229-83-33"/>
+            <column name="email" value="info@hoteleurope.by"/>
+            <column name="check_in" value="14:00:00"/>
+            <column name="check_out" value="12:00:00"/>
+            <column name="amenities" value="Indoor pool,Sauna,Free WiFi,Restaurant,Bar,Concierge service"/>
+        </insert>
+        <insert tableName="hotels">
+            <column name="id" valueNumeric="5"/>
+            <column name="name" value="Hotel Yubileiny"/>
+            <column name="description" value="Comfortable 3-star hotel near the Svisloch River and Victory Park, ideal for business and leisure."/>
+            <column name="brand" value="Yubileiny"/>
+            <column name="house_number" valueNumeric="19"/>
+            <column name="street" value="Pieramožcaŭ Avenue"/>
+            <column name="city" value="Minsk"/>
+            <column name="country" value="Belarus"/>
+            <column name="postCode" value="220004"/>
+            <column name="phone" value="+375 17 226-90-37"/>
+            <column name="email" value="info@yhotel.by"/>
+            <column name="check_in" value="13:00:00"/>
+            <column name="check_out" value="12:00:00"/>
+            <column name="amenities" value="Casino,Free WiFi,Restaurant,Parking,Conference rooms,24h reception"/>
+        </insert>
+        <insert tableName="hotels">
+            <column name="id" valueNumeric="6"/>
+            <column name="name" value="Boutique Hotel Buta"/>
+            <column name="description" value="Stylish boutique hotel with modern design, casino, and wellness facilities in central Minsk."/>
+            <column name="brand" value="Buta"/>
+            <column name="house_number" valueNumeric="7"/>
+            <column name="street" value="Miasnikova Street"/>
+            <column name="city" value="Minsk"/>
+            <column name="country" value="Belarus"/>
+            <column name="postCode" value="220030"/>
+            <column name="phone" value="+375 17 366-55-55"/>
+            <column name="email" value="info@hotel-buta.by"/>
+            <column name="check_in" value="14:00:00"/>
+            <column name="check_out" value="12:00:00"/>
+            <column name="amenities" value="Casino,Spa,Free WiFi,Indoor pool,Restaurant,Private parking"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
