@@ -25,6 +25,8 @@ public class Hotel {
     private String name;
     @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
+    private String brand;
     @Embedded
     private Address address;
     @Embedded
@@ -53,6 +55,14 @@ public class Hotel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public Address getAddress() {
@@ -93,6 +103,7 @@ public class Hotel {
         int result = 1;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((description == null) ? 0 : description.hashCode());
+        result = prime * result + ((brand == null) ? 0 : brand.hashCode());
         result = prime * result + ((address == null) ? 0 : address.hashCode());
         result = prime * result + ((contacts == null) ? 0 : contacts.hashCode());
         result = prime * result + ((arrivalTime == null) ? 0 : arrivalTime.hashCode());
@@ -119,6 +130,11 @@ public class Hotel {
                 return false;
         } else if (!description.equals(other.description))
             return false;
+        if (brand == null) {
+            if (other.brand != null)
+                return false;
+        } else if (!brand.equals(other.brand))
+            return false;
         if (address == null) {
             if (other.address != null)
                 return false;
@@ -139,8 +155,8 @@ public class Hotel {
 
     @Override
     public String toString() {
-        return "Hotel [id=" + id + ", name=" + name + ", description=" + description + ", address=" + address
-                + ", contacts=" + contacts + ", arrivalTime=" + arrivalTime + ", amenities="
+        return "Hotel [id=" + id + ", name=" + name + ", description=" + description + ", brand=" + brand + ", address="
+                + address + ", contacts=" + contacts + ", arrivalTime=" + arrivalTime + ", amenities="
                 + Arrays.toString(amenities) + "]";
     }
 }
