@@ -2,19 +2,33 @@ package com.hotels.hotels.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 
 @Embeddable
 public class Address {
     @Column(name = "house_number", nullable = false)
+    @Positive
     private int houseNumber;
+
     @Column(nullable = false)
+    @NotEmpty
     private String street;
+
     @Column(nullable = false)
+    @NotEmpty
     private String city;
+
     @Column(nullable = false)
+    @NotEmpty
     private String country;
-    @Column(nullable = false)
-    private String postcode;
+
+    @Column(name = "postcode", nullable = false)
+    @NotNull
+    @Pattern(regexp = "^\\d{6}$")
+    private String postCode;
 
     public int getHouseNumber() {
         return houseNumber;
@@ -48,12 +62,12 @@ public class Address {
         this.country = country;
     }
 
-    public String getPostcode() {
-        return postcode;
+    public String getPostCode() {
+        return postCode;
     }
 
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
+    public void setPostCode(String postcode) {
+        this.postCode = postcode;
     }
 
     @Override
@@ -64,7 +78,7 @@ public class Address {
         result = prime * result + ((street == null) ? 0 : street.hashCode());
         result = prime * result + ((city == null) ? 0 : city.hashCode());
         result = prime * result + ((country == null) ? 0 : country.hashCode());
-        result = prime * result + ((postcode == null) ? 0 : postcode.hashCode());
+        result = prime * result + ((postCode == null) ? 0 : postCode.hashCode());
         return result;
     }
 
@@ -94,10 +108,10 @@ public class Address {
                 return false;
         } else if (!country.equals(other.country))
             return false;
-        if (postcode == null) {
-            if (other.postcode != null)
+        if (postCode == null) {
+            if (other.postCode != null)
                 return false;
-        } else if (!postcode.equals(other.postcode))
+        } else if (!postCode.equals(other.postCode))
             return false;
         return true;
     }
@@ -105,6 +119,6 @@ public class Address {
     @Override
     public String toString() {
         return "Address [houseNumber=" + houseNumber + ", street=" + street + ", city=" + city + ", country=" + country
-                + ", postcode=" + postcode + "]";
+                + ", postcode=" + postCode + "]";
     }
 }

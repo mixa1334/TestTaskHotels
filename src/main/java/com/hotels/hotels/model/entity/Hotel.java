@@ -1,16 +1,17 @@
 package com.hotels.hotels.model.entity;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.hotels.hotels.model.entity.converter.AmenitiesConverter;
-
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -23,7 +24,7 @@ public class Hotel {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String description;
     @Column(nullable = false)
     private String brand;
@@ -33,9 +34,10 @@ public class Hotel {
     private Contacts contacts;
     @Embedded
     private ArrivalTime arrivalTime;
-    @Column(name = "amenities")
-    @Convert(converter = AmenitiesConverter.class)
-    private String[] amenities;
+    @ElementCollection
+    @CollectionTable(name = "amenities", joinColumns = @JoinColumn(name = "hotel_id"), uniqueConstraints = @UniqueConstraint(columnNames = {"hotel_id", "amenity" }))
+    @Column(name = "amenity")
+    private List<String> amenities = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -89,11 +91,11 @@ public class Hotel {
         this.arrivalTime = arrivalTime;
     }
 
-    public String[] getAmenities() {
+    public List<String> getAmenities() {
         return amenities;
     }
 
-    public void setAmenities(String[] amenities) {
+    public void setAmenities(List<String> amenities) {
         this.amenities = amenities;
     }
 
@@ -107,7 +109,7 @@ public class Hotel {
         result = prime * result + ((address == null) ? 0 : address.hashCode());
         result = prime * result + ((contacts == null) ? 0 : contacts.hashCode());
         result = prime * result + ((arrivalTime == null) ? 0 : arrivalTime.hashCode());
-        result = prime * result + Arrays.hashCode(amenities);
+        result = prime * result + ((amenities == null) ? 0 : amenities.hashCode());
         return result;
     }
 
@@ -150,13 +152,18 @@ public class Hotel {
                 return false;
         } else if (!arrivalTime.equals(other.arrivalTime))
             return false;
-        return Arrays.equals(amenities, other.amenities);
+        if (amenities == null) {
+            if (other.amenities != null)
+                return false;
+        } else if (!amenities.equals(other.amenities))
+            return false;
+        return true;
     }
 
     @Override
     public String toString() {
         return "Hotel [id=" + id + ", name=" + name + ", description=" + description + ", brand=" + brand + ", address="
-                + address + ", contacts=" + contacts + ", arrivalTime=" + arrivalTime + ", amenities="
-                + Arrays.toString(amenities) + "]";
+                + address + ", contacts=" + contacts + ", arrivalTime=" + arrivalTime + ", amenities=" + amenities
+                + "]";
     }
 }

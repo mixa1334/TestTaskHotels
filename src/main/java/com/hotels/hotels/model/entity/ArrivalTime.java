@@ -2,14 +2,21 @@ package com.hotels.hotels.model.entity;
 
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotNull;
 
 @Embeddable
 public class ArrivalTime {
     @Column(name = "check_in", nullable = false)
+    @NotNull
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime checkIn;
+
     @Column(name = "check_out")
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime checkOut;
 
     public LocalTime getCheckIn() {
