@@ -14,7 +14,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="brand" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -44,9 +44,29 @@
                 <constraints nullable="false"/>
             </column>
             <column name="check_out" type="TIME"/>
-            <column name="amenities" type="VARCHAR(255)"/>
         </createTable>
-        <addUniqueConstraint tableName="hotels" columnNames="house_number,street,city,country,postcode" constraintName="unique_address"/>
+        <createTable tableName="amenities">
+            <column name="hotel_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amenity" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addUniqueConstraint
+            tableName="hotels"
+            columnNames="house_number,street,city,country,postcode"
+            constraintName="unique_address"/>
+        <addUniqueConstraint 
+            tableName="amenities"
+            columnNames="hotel_id, amenity"
+            constraintName="unique_hotel_amenity"/>
+        <addForeignKeyConstraint
+            baseTableName="amenities"
+            baseColumnNames="hotel_id"
+            constraintName="fk_hotel_amenities"
+            referencedTableName="hotels"
+            referencedColumnNames="id"/>
         <rollback>
             <dropTable tableName="hotels"/>
         </rollback>
