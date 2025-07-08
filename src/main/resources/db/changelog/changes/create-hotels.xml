@@ -7,7 +7,7 @@
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet author="master" id="1">
         <createTable tableName="hotels">
-            <column autoIncrement="true" name="id" type="INT">
+            <column name="id" type="INT" autoIncrement="true" >
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(255)">
@@ -19,7 +19,7 @@
             <column name="brand" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="house_number" type="VARCHAR(255)">
+            <column name="house_number" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="street" type="VARCHAR(255)">
@@ -31,7 +31,7 @@
             <column name="country" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="postcode" type="VARCHAR(255)">
+            <column name="post_code" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="phone" type="VARCHAR(255)">
@@ -55,7 +55,7 @@
         </createTable>
         <addUniqueConstraint
             tableName="hotels"
-            columnNames="house_number,street,city,country,postcode"
+            columnNames="house_number,street,city,country,post_code"
             constraintName="unique_address"/>
         <addUniqueConstraint 
             tableName="amenities"
