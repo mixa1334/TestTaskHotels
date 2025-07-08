@@ -15,6 +15,6 @@ public class Config implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(
                 String.class, Histogram.Type.class,
-                str -> Histogram.Type.fromString(str).orElseThrow(IllegalArgumentException::new));
+                str -> Histogram.Type.fromString(str).orElseThrow(() -> new IllegalArgumentException("Invalid parameter type")));
     }
 }

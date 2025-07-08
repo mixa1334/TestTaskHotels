@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.hotels.hotels.dto.HistogramDto;
 import com.hotels.hotels.dto.HotelShortInfo;
@@ -24,7 +25,6 @@ import com.hotels.hotels.model.entity.Hotel;
 import com.hotels.hotels.model.service.Histogram;
 import com.hotels.hotels.model.service.HotelService;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
@@ -75,12 +75,15 @@ public class HotelController {
 
     @PostMapping("/hotels")
     @Loggable
-    public ResponseEntity<HotelShortInfo> createHotel(HttpServletRequest request,
-            @RequestBody @Valid NewHotelDto newHotelDto) {
+    public ResponseEntity<HotelShortInfo> createHotel(@RequestBody @Valid NewHotelDto newHotelDto) {
         HotelShortInfo hotel = HotelShortInfo.fromHotel(service.createHotel(newHotelDto.toHotel()));
-        String responseUri = request.getRequestURI() + "/" + hotel.id();
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(hotel.id())
+                .toUri();
         return ResponseEntity
-                .created(URI.create(responseUri))
+                .created(location)
                 .body(hotel);
     }
 
