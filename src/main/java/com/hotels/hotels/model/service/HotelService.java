@@ -3,21 +3,19 @@ package com.hotels.hotels.model.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.hotels.hotels.model.dto.Histogram;
-import com.hotels.hotels.model.dto.HotelShortInfo;
 import com.hotels.hotels.model.entity.Hotel;
 
 public interface HotelService {
-    List<HotelShortInfo> getShortInfoAboutHotels();
+    List<Hotel> getAll();
 
-    Optional<Hotel> getHotel(Long id);
+    Optional<Hotel> getById(Long id);
 
-    List<HotelShortInfo> getHotelsByParameters(Optional<String> name, Optional<String> brand, Optional<String> city,
+    List<Hotel> getHotelsByParameters(Optional<String> name, Optional<String> brand, Optional<String> city,
             Optional<String> country, Optional<String[]> amenities);
 
-    HotelShortInfo createHotel(Hotel hotel);
+    Hotel createHotel(Hotel hotel);
 
-    boolean addAmenitiesToHotel(Long hotelId, String[] amenities);
+    boolean addAmenitiesToHotel(Long id, String[] amenities);
 
-    List<Histogram> makeHistogramByParameter(String parameter);
+    List<Histogram> makeHistogramByParameter(Histogram.Type parameter);
 }
