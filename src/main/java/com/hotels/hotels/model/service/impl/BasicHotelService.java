@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hotels.hotels.logging.Loggable;
 import com.hotels.hotels.model.entity.Hotel;
 import com.hotels.hotels.model.repository.HotelRepository;
 import com.hotels.hotels.model.service.Histogram;
@@ -23,6 +24,7 @@ public class BasicHotelService implements HotelService {
     private HotelRepository hotelRepository;
 
     @Override
+    @Loggable
     public boolean addAmenitiesToHotel(Long id, String[] amenities) {
         Optional<Hotel> hotelById = hotelRepository.findById(id);
         if (hotelById.isEmpty()) {
@@ -36,21 +38,25 @@ public class BasicHotelService implements HotelService {
     }
 
     @Override
+    @Loggable
     public Hotel createHotel(Hotel hotel) {
         return hotelRepository.save(hotel);
     }
 
     @Override
+    @Loggable
     public List<Hotel> getAll() {
         return hotelRepository.findAll();
     }
 
     @Override
+    @Loggable
     public Optional<Hotel> getById(Long id) {
         return hotelRepository.findById(id);
     }
 
     @Override
+    @Loggable
     public List<Hotel> getHotelsByParameters(Optional<String> name, Optional<String> brand,
             Optional<String> city, Optional<String> country, Optional<String[]> amenities) {
         Specification<Hotel> specification = Specification.allOf(
@@ -63,6 +69,7 @@ public class BasicHotelService implements HotelService {
     }
 
     @Override
+    @Loggable
     public List<Histogram> makeHistogramByParameter(Histogram.Type parameter) {
         return parameter.apply(hotelRepository);
     }

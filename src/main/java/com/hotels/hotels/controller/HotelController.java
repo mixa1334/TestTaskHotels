@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hotels.hotels.dto.HistogramDto;
 import com.hotels.hotels.dto.HotelShortInfo;
 import com.hotels.hotels.dto.NewHotelDto;
+import com.hotels.hotels.logging.Loggable;
 import com.hotels.hotels.model.entity.Hotel;
 import com.hotels.hotels.model.service.Histogram;
 import com.hotels.hotels.model.service.HotelService;
@@ -29,13 +30,14 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 
 @RestController
-@RequestMapping(path = "/property-view")
+@RequestMapping(path = "/property-view", produces = "application/json")
 @Validated
 public class HotelController {
     @Autowired
     private HotelService service;
 
     @GetMapping("/hotels")
+    @Loggable
     public List<HotelShortInfo> getAllHotels() {
         return service
                 .getAll()
@@ -45,12 +47,14 @@ public class HotelController {
     }
 
     @GetMapping("/hotels/{id}")
+    @Loggable
     public ResponseEntity<Hotel> getHotelById(
             @PathVariable @Positive(message = "invalid id: must be positive number") Long id) {
         return ResponseEntity.of(service.getById(id));
     }
 
     @GetMapping("/search")
+    @Loggable
     public List<HotelShortInfo> getHotelsByParameters(@RequestParam Optional<String> name,
             @RequestParam Optional<String> brand, @RequestParam Optional<String> city,
             @RequestParam Optional<String> country, @RequestParam Optional<String[]> amenities) {
@@ -62,6 +66,7 @@ public class HotelController {
     }
 
     @GetMapping("/histogram/{param}")
+    @Loggable
     public Map<String, Long> makeHistogramByParameter(@PathVariable Histogram.Type param) {
         return HistogramDto
                 .fromHistogram(service.makeHistogramByParameter(param))
@@ -69,6 +74,7 @@ public class HotelController {
     }
 
     @PostMapping("/hotels")
+    @Loggable
     public ResponseEntity<HotelShortInfo> createHotel(HttpServletRequest request,
             @RequestBody @Valid NewHotelDto newHotelDto) {
         HotelShortInfo hotel = HotelShortInfo.fromHotel(service.createHotel(newHotelDto.toHotel()));
@@ -79,6 +85,7 @@ public class HotelController {
     }
 
     @PostMapping("/hotels/{id}/amenities")
+    @Loggable
     public ResponseEntity<?> addAmenitiesToHotel(
             @PathVariable @Positive(message = "invalid id: must be positive number") Long id,
             @RequestBody @NotEmpty(message = "invalid amenities: cant be empty") String[] amenities) {
