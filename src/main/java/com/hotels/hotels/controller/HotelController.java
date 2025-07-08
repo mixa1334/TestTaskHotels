@@ -1,5 +1,6 @@
 package com.hotels.hotels.controller;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -22,6 +23,7 @@ import com.hotels.hotels.model.entity.Hotel;
 import com.hotels.hotels.model.service.Histogram;
 import com.hotels.hotels.model.service.HotelService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
@@ -67,8 +69,13 @@ public class HotelController {
     }
 
     @PostMapping("/hotels")
-    public HotelShortInfo createHotel(@RequestBody @Valid NewHotelDto newHotelDto) {
-        return HotelShortInfo.fromHotel(service.createHotel(newHotelDto.toHotel()));
+    public ResponseEntity<HotelShortInfo> createHotel(HttpServletRequest request,
+            @RequestBody @Valid NewHotelDto newHotelDto) {
+        HotelShortInfo hotel = HotelShortInfo.fromHotel(service.createHotel(newHotelDto.toHotel()));
+        String responseUri = request.getRequestURI() + "/" + hotel.id();
+        return ResponseEntity
+                .created(URI.create(responseUri))
+                .body(hotel);
     }
 
     @PostMapping("/hotels/{id}/amenities")

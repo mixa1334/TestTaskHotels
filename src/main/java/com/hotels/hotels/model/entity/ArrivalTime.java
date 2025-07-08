@@ -12,11 +12,11 @@ import jakarta.validation.constraints.NotNull;
 public class ArrivalTime {
     @Column(name = "check_in", nullable = false)
     @NotNull
-    @JsonFormat(pattern = "HH:mm")
+    // @JsonFormat(pattern = "HH:mm")
     private LocalTime checkIn;
 
     @Column(name = "check_out")
-    @JsonFormat(pattern = "HH:mm")
+    // @JsonFormat(pattern = "HH:mm")
     private LocalTime checkOut;
 
     public LocalTime getCheckIn() {

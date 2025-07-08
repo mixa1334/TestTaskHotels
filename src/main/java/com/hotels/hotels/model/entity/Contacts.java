@@ -10,12 +10,12 @@ import jakarta.validation.constraints.Pattern;
 public class Contacts {
     @Column(nullable = false, unique = true)
     @NotBlank
-    @Pattern(regexp = "^\\+375\\s(17|29|44|33|25)\\s\\d{3}-\\d{2}-\\d{2}$")
+    // @Pattern(regexp = "^\\+375\\s(17|29|44|33|25)\\s\\d{3}-\\d{2}-\\d{2}$")
     private String phone;
 
     @Column(nullable = false, unique = true)
     @NotBlank
-    @Email
+    // @Email
     private String email;
 
     public String getPhone() {

@@ -26,7 +26,7 @@ public class Address {
 
     @Column(name = "postcode", nullable = false)
     @NotBlank
-    @Pattern(regexp = "^\\d{6}$")
+    // @Pattern(regexp = "^\\d{6}$")
     private String postCode;
 
     public int getHouseNumber() {
