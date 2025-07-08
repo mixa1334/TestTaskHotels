@@ -10,6 +10,14 @@ import com.hotels.hotels.model.entity.Hotel;
 import com.hotels.hotels.model.service.Histogram;
 
 public interface HotelRepository extends JpaRepository<Hotel, Long>, JpaSpecificationExecutor<Hotel> {
+
+    boolean existsByContactsEmail(String email);
+
+    boolean existsByContactsPhone(String phone);
+
+    boolean existsByAddressStreetAndAddressHouseNumberAndAddressCityAndAddressCountryAndAddressPostCode(String street,
+            int houseNumber, String city, String country, String postCode);
+
     @Query("SELECT new com.hotels.hotels.model.service.Histogram(h.brand, COUNT(h)) FROM Hotel h GROUP BY h.brand")
     List<Histogram> histogramByBrand();
 
