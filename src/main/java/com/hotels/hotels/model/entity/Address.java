@@ -2,8 +2,7 @@ package com.hotels.hotels.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
@@ -14,19 +13,19 @@ public class Address {
     private int houseNumber;
 
     @Column(nullable = false)
-    @NotEmpty
+    @NotBlank
     private String street;
 
     @Column(nullable = false)
-    @NotEmpty
+    @NotBlank
     private String city;
 
     @Column(nullable = false)
-    @NotEmpty
+    @NotBlank
     private String country;
 
     @Column(name = "postcode", nullable = false)
-    @NotNull
+    @NotBlank
     @Pattern(regexp = "^\\d{6}$")
     private String postCode;
 

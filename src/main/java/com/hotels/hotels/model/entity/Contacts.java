@@ -3,18 +3,18 @@ package com.hotels.hotels.model.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 @Embeddable
 public class Contacts {
     @Column(nullable = false, unique = true)
-    @NotNull
+    @NotBlank
     @Pattern(regexp = "^\\+375\\s(17|29|44|33|25)\\s\\d{3}-\\d{2}-\\d{2}$")
     private String phone;
 
     @Column(nullable = false, unique = true)
-    @NotNull
+    @NotBlank
     @Email
     private String email;
 

@@ -14,6 +14,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "hotels", uniqueConstraints = @UniqueConstraint(name = "unique_address", columnNames = { "house_number",
@@ -22,18 +24,30 @@ public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
+    @NotBlank
     private String name;
+
     @Column(nullable = true)
     private String description;
+
     @Column(nullable = false)
+    @NotBlank
     private String brand;
+
     @Embedded
+    @Valid
     private Address address;
+
     @Embedded
+    @Valid
     private Contacts contacts;
+
     @Embedded
+    @Valid
     private ArrivalTime arrivalTime;
+
     @ElementCollection
     @CollectionTable(name = "amenities", joinColumns = @JoinColumn(name = "hotel_id"), uniqueConstraints = @UniqueConstraint(columnNames = {"hotel_id", "amenity" }))
     @Column(name = "amenity")
