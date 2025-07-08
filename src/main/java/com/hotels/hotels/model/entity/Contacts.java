@@ -10,13 +10,21 @@ import jakarta.validation.constraints.Pattern;
 public class Contacts {
     @Column(nullable = false, unique = true)
     @NotBlank
-    // @Pattern(regexp = "^\\+375\\s(17|29|44|33|25)\\s\\d{3}-\\d{2}-\\d{2}$")
+    @Pattern(regexp = "^\\+375\\s(17|29|44|33|25)\\s\\d{3}-\\d{2}-\\d{2}$")
     private String phone;
 
     @Column(nullable = false, unique = true)
     @NotBlank
-    // @Email
+    @Email
     private String email;
+
+    public Contacts(@NotBlank String phone, @NotBlank String email) {
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public Contacts() {
+    }
 
     public String getPhone() {
         return phone;
@@ -49,7 +57,7 @@ public class Contacts {
             return true;
         if (obj == null)
             return false;
-        if (getClass() != obj.getClass())
+        if (!(obj instanceof Contacts))
             return false;
         Contacts other = (Contacts) obj;
         if (phone == null) {

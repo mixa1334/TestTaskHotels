@@ -133,7 +133,7 @@ public class Hotel {
             return true;
         if (obj == null)
             return false;
-        if (getClass() != obj.getClass())
+        if (!(obj instanceof Hotel))
             return false;
         Hotel other = (Hotel) obj;
         if (name == null) {

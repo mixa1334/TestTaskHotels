@@ -24,10 +24,22 @@ public class Address {
     @NotBlank
     private String country;
 
-    @Column(name = "postcode", nullable = false)
+    @Column(name = "post_code", nullable = false)
     @NotBlank
-    // @Pattern(regexp = "^\\d{6}$")
+    @Pattern(regexp = "^\\d{6}$")
     private String postCode;
+
+    public Address() {
+    }
+
+    public Address(@Positive int houseNumber, @NotBlank String street, @NotBlank String city, @NotBlank String country,
+            @NotBlank String postCode) {
+        this.houseNumber = houseNumber;
+        this.street = street;
+        this.city = city;
+        this.country = country;
+        this.postCode = postCode;
+    }
 
     public int getHouseNumber() {
         return houseNumber;
@@ -87,7 +99,7 @@ public class Address {
             return true;
         if (obj == null)
             return false;
-        if (getClass() != obj.getClass())
+        if (!(obj instanceof Address))
             return false;
         Address other = (Address) obj;
         if (houseNumber != other.houseNumber)

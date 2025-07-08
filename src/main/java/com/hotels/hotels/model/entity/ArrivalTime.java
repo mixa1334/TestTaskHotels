@@ -12,12 +12,20 @@ import jakarta.validation.constraints.NotNull;
 public class ArrivalTime {
     @Column(name = "check_in", nullable = false)
     @NotNull
-    // @JsonFormat(pattern = "HH:mm")
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime checkIn;
 
     @Column(name = "check_out")
-    // @JsonFormat(pattern = "HH:mm")
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime checkOut;
+
+    public ArrivalTime() {
+    }
+
+    public ArrivalTime(@NotNull LocalTime checkIn, LocalTime checkOut) {
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+    }
 
     public LocalTime getCheckIn() {
         return checkIn;
@@ -50,7 +58,7 @@ public class ArrivalTime {
             return true;
         if (obj == null)
             return false;
-        if (getClass() != obj.getClass())
+        if (!(obj instanceof ArrivalTime))
             return false;
         ArrivalTime other = (ArrivalTime) obj;
         if (checkIn == null) {
