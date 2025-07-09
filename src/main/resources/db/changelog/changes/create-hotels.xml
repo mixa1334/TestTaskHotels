@@ -14,16 +14,16 @@
         <sql>
             CREATE TABLE hotels (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(200) NOT NULL,
+                name VARCHAR(50) NOT NULL,
                 description VARCHAR(200),
-                brand VARCHAR(200) NOT NULL,
+                brand VARCHAR(50) NOT NULL,
                 house_number INT NOT NULL,
-                street VARCHAR(200) NOT NULL,
-                city VARCHAR(200) NOT NULL,
-                country VARCHAR(200) NOT NULL,
-                post_code VARCHAR(200) NOT NULL,
-                phone VARCHAR(200) NOT NULL UNIQUE,
-                email VARCHAR(102000) NOT NULL UNIQUE,
+                street VARCHAR(50) NOT NULL,
+                city VARCHAR(50) NOT NULL,
+                country VARCHAR(50) NOT NULL,
+                post_code VARCHAR(10) NOT NULL,
+                phone VARCHAR(30) NOT NULL UNIQUE,
+                email VARCHAR(50) NOT NULL UNIQUE,
                 check_in TIME NOT NULL,
                 check_out TIME,
                 CONSTRAINT uc_hotel_address UNIQUE (house_number, street, city, country, post_code)
@@ -31,7 +31,7 @@
 
             CREATE TABLE amenities (
                 hotel_id INT NOT NULL,
-                amenity VARCHAR(200) NOT NULL,
+                amenity VARCHAR(100) NOT NULL,
                 CONSTRAINT uc_hotel_amenities UNIQUE (hotel_id, amenity),
                 CONSTRAINT fk_hotel_amenities
                     FOREIGN KEY (hotel_id)

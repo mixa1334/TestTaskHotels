@@ -10,15 +10,15 @@ import jakarta.validation.constraints.Pattern;
 
 @Embeddable
 public class Contacts {
-    @Column(nullable = false, unique = true, length = 200)
+    @Column(nullable = false, unique = true, length = 30)
     @NotBlank
     @Pattern(regexp = "^\\+375\\s(17|29|44|33|25)\\s\\d{3}-\\d{2}-\\d{2}$")
     private String phone;
 
-    @Column(nullable = false, unique = true, length = 200)
+    @Column(nullable = false, unique = true, length = 50)
     @NotBlank
     @Email
-    @Length(max = 200)
+    @Length(max = 50)
     private String email;
 
     public Contacts(@NotBlank String phone, @NotBlank String email) {

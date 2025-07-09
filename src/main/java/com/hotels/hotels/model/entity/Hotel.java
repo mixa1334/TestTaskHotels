@@ -28,18 +28,18 @@ public class Hotel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false, length = 50)
     @NotBlank
-    @Length(max = 200)
+    @Length(max = 50)
     private String name;
 
     @Column(nullable = true, length = 200)
     @Length(max = 200)
     private String description;
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false, length = 50)
     @NotBlank
-    @Length(max = 200)
+    @Length(max = 50)
     private String brand;
 
     @Embedded

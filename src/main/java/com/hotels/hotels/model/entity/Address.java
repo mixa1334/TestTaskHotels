@@ -14,22 +14,22 @@ public class Address {
     @Positive
     private int houseNumber;
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false, length = 50)
     @NotBlank
-    @Length(max = 200)
+    @Length(max = 50)
     private String street;
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false, length = 50)
     @NotBlank
-    @Length(max = 200)
+    @Length(max = 50)
     private String city;
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false, length = 50)
     @NotBlank
-    @Length(max = 200)
+    @Length(max = 50)
     private String country;
 
-    @Column(name = "post_code", nullable = false, length = 200)
+    @Column(name = "post_code", nullable = false, length = 10)
     @NotBlank
     @Pattern(regexp = "^\\d{6}$")
     private String postCode;
