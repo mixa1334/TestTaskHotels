@@ -6,67 +6,39 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet author="master" id="1">
-        <createTable tableName="hotels">
-            <column name="id" type="INT" autoIncrement="true" >
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="description" type="VARCHAR(255)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="brand" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="house_number" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="street" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="city" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="country" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="post_code" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="phone" type="VARCHAR(255)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="email" type="VARCHAR(255)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="check_in" type="TIME">
-                <constraints nullable="false"/>
-            </column>
-            <column name="check_out" type="TIME"/>
-        </createTable>
-        <createTable tableName="amenities">
-            <column name="hotel_id" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="amenity" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <addUniqueConstraint
-            tableName="hotels"
-            columnNames="house_number,street,city,country,post_code"
-            constraintName="unique_address"/>
-        <addUniqueConstraint 
-            tableName="amenities"
-            columnNames="hotel_id, amenity"
-            constraintName="unique_hotel_amenity"/>
-        <addForeignKeyConstraint
-            baseTableName="amenities"
-            baseColumnNames="hotel_id"
-            constraintName="fk_hotel_amenities"
-            referencedTableName="hotels"
-            referencedColumnNames="id"/>
+        <preConditions onFail="MARK_RAN" onError="HALT">
+            <not>
+                <tableExists tableName="hotels"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE hotels (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(200) NOT NULL,
+                description VARCHAR(200),
+                brand VARCHAR(200) NOT NULL,
+                house_number INT NOT NULL,
+                street VARCHAR(200) NOT NULL,
+                city VARCHAR(200) NOT NULL,
+                country VARCHAR(200) NOT NULL,
+                post_code VARCHAR(200) NOT NULL,
+                phone VARCHAR(200) NOT NULL UNIQUE,
+                email VARCHAR(102000) NOT NULL UNIQUE,
+                check_in TIME NOT NULL,
+                check_out TIME,
+                CONSTRAINT uc_hotel_address UNIQUE (house_number, street, city, country, post_code)
+            );
+
+            CREATE TABLE amenities (
+                hotel_id INT NOT NULL,
+                amenity VARCHAR(200) NOT NULL,
+                CONSTRAINT uc_hotel_amenities UNIQUE (hotel_id, amenity),
+                CONSTRAINT fk_hotel_amenities
+                    FOREIGN KEY (hotel_id)
+                    REFERENCES hotels(id)
+                    ON DELETE CASCADE
+            );
+        </sql>
         <rollback>
             <dropTable tableName="hotels"/>
         </rollback>

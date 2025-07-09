@@ -1,13 +1,16 @@
 package com.hotels.hotels.model.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.hibernate.validator.constraints.Length;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,22 +21,25 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "hotels", uniqueConstraints = @UniqueConstraint(name = "unique_address", columnNames = { "house_number",
-        "street", "city", "country", "postcode" }))
+@Table(name = "hotels", uniqueConstraints = @UniqueConstraint(name = "uc_hotel_address", columnNames = { "house_number",
+        "street", "city", "country", "post_code" }))
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 200)
     @NotBlank
+    @Length(max = 200)
     private String name;
 
-    @Column(nullable = true)
+    @Column(nullable = true, length = 200)
+    @Length(max = 200)
     private String description;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 200)
     @NotBlank
+    @Length(max = 200)
     private String brand;
 
     @Embedded
@@ -49,9 +55,11 @@ public class Hotel {
     private ArrivalTime arrivalTime;
 
     @ElementCollection
-    @CollectionTable(name = "amenities", joinColumns = @JoinColumn(name = "hotel_id"), uniqueConstraints = @UniqueConstraint(columnNames = {"hotel_id", "amenity" }))
+    @CollectionTable(name = "amenities",
+                joinColumns = @JoinColumn(name = "hotel_id", nullable = false), foreignKey = @ForeignKey(name = "fk_hotel_amenities"),
+                uniqueConstraints = @UniqueConstraint(name = "uc_hotel_amenities", columnNames = {"hotel_id", "amenity" }))
     @Column(name = "amenity")
-    private List<String> amenities = new ArrayList<>();
+    private Set<String> amenities = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -105,11 +113,11 @@ public class Hotel {
         this.arrivalTime = arrivalTime;
     }
 
-    public List<String> getAmenities() {
+    public Set<String> getAmenities() {
         return amenities;
     }
 
-    public void setAmenities(List<String> amenities) {
+    public void setAmenities(Set<String> amenities) {
         this.amenities = amenities;
     }
 

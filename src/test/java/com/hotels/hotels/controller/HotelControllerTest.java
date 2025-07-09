@@ -27,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Set;
 
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -42,7 +43,7 @@ class HotelControllerTest {
 
     @Test
     void testAddAmenitiesToHotel() throws Throwable {
-        List<String> amenities = List.of("spa", "free wifi", "test");
+        Set<String> amenities = Set.of("spa", "free wifi", "test");
         String input = objectMapper.writeValueAsString(amenities);
 
         Hotel hotel = hotelRepository.findById(1L).get();

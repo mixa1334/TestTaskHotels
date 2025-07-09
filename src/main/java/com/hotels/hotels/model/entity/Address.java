@@ -1,5 +1,7 @@
 package com.hotels.hotels.model.entity;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
@@ -12,19 +14,22 @@ public class Address {
     @Positive
     private int houseNumber;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 200)
     @NotBlank
+    @Length(max = 200)
     private String street;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 200)
     @NotBlank
+    @Length(max = 200)
     private String city;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 200)
     @NotBlank
+    @Length(max = 200)
     private String country;
 
-    @Column(name = "post_code", nullable = false)
+    @Column(name = "post_code", nullable = false, length = 200)
     @NotBlank
     @Pattern(regexp = "^\\d{6}$")
     private String postCode;

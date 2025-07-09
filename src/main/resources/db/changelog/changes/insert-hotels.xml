@@ -6,135 +6,35 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet author="master" id="2">
-        <insert tableName="hotels">
-            <column name="name" value="DoubleTree by Hilton Minsk"/>
-            <column name="description" value="The DoubleTree by Hilton Hotel Minsk offers 193 luxurious rooms in the Belorussian capital and stunning views of Minsk city from the hotel's 20th floor ..."/>
-            <column name="brand" value="Hilton"/>
-            <column name="house_number" valueNumeric="9"/>
-            <column name="street" value="Pobediteley Avenue"/>
-            <column name="city" value="Minsk"/>
-            <column name="country" value="Belarus"/>
-            <column name="post_code" value="220004"/>
-            <column name="phone" value="+375 17 309-80-00"/>
-            <column name="email" value="doubletreeminsk.info@hilton.com"/>
-            <column name="check_in" value="14:00:00"/>
-            <column name="check_out" value="12:00:00"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="1"/>
-            <column name="amenity" value="Free parking"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="1"/>
-            <column name="amenity" value="Free WiFi"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="1"/>
-            <column name="amenity" value="Non-smoking rooms"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="1"/>
-            <column name="amenity" value="Concierge"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="1"/>
-            <column name="amenity" value="On-site restaurant"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="1"/>
-            <column name="amenity" value="Fitness center"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="1"/>
-            <column name="amenity" value="Pet-friendly rooms"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="1"/>
-            <column name="amenity" value="Room service"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="1"/>
-            <column name="amenity" value="Business center"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="1"/>
-            <column name="amenity" value="Meeting rooms"/>
-        </insert>
-        <insert tableName="hotels">
-            <column name="name" value="President Hotel"/>
-            <column name="description" value="Elegant 5-star hotel in the heart of Minsk, offering refined rooms, a spa, and conference facilities."/>
-            <column name="brand" value="President"/>
-            <column name="house_number" valueNumeric="18"/>
-            <column name="street" value="vulica Kirava"/>
-            <column name="city" value="Minsk"/>
-            <column name="country" value="Belarus"/>
-            <column name="post_code" value="220030"/>
-            <column name="phone" value="+375 17 229-70-00"/>
-            <column name="email" value="info@president-hotel.by"/>
-            <column name="check_in" value="14:00:00"/>
-            <column name="check_out" value="12:00:00"/>
-        </insert>
-         <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="2"/>
-            <column name="amenity" value="Spa"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="2"/>
-            <column name="amenity" value="Fitness center"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="2"/>
-            <column name="amenity" value="Free WiFi"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="2"/>
-            <column name="amenity" value="Restaurant"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="2"/>
-            <column name="amenity" value="Conference rooms"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="2"/>
-            <column name="amenity" value="Room service"/>
-        </insert>
-        <insert tableName="hotels">
-            <column name="name" value="Beijing Hotel Minsk"/>
-            <column name="description" value="Luxury hotel with Chinese-inspired design, located near the Svisloch River and city center."/>
-            <column name="brand" value="Beijing"/>
-            <column name="house_number" valueNumeric="36"/>
-            <column name="street" value="Čyrvonaarmiejskaja Street"/>
-            <column name="city" value="Brest"/>
-            <column name="country" value="Belarus"/>
-            <column name="post_code" value="220030"/>
-            <column name="phone" value="+375 17 329-77-77"/>
-            <column name="email" value="info@beijinghotelminsk.com"/>
-            <column name="check_in" value="14:00:00"/>
-            <column name="check_out" value="12:00:00"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="3"/>
-            <column name="amenity" value="Indoor pool"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="3"/>
-            <column name="amenity" value="Spa"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="3"/>
-            <column name="amenity" value="Free parking"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="3"/>
-            <column name="amenity" value="Chinese restaurant"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="3"/>
-            <column name="amenity" value="Fitness center"/>
-        </insert>
-        <insert tableName="amenities">
-            <column name="hotel_id" valueNumeric="3"/>
-            <column name="amenity" value="Business lounge"/>
-        </insert>
+        <sql>
+           INSERT INTO hotels (name, description, brand, house_number, street, city, country, post_code, phone, email, check_in, check_out) VALUES
+            ('DoubleTree by Hilton Minsk','The DoubleTree by Hilton Hotel Minsk offers 193 luxurious rooms in the Belorussian capital and stunning views of Minsk city from the hotel''s 20th floor ...','Hilton',9,'Pobediteley Avenue','Minsk','Belarus','220004','+375 17 309-80-00','doubletreeminsk.info@hilton.com','14:00:00','12:00:00'),
+            ('President Hotel','Elegant 5-star hotel in the heart of Minsk, offering refined rooms, a spa, and conference facilities.','President',18,'vulica Kirava','Minsk','Belarus','220030','+375 17 229-70-00','info@president-hotel.by','14:00:00','12:00:00'),
+            ('Beijing Hotel Minsk','Luxury hotel with Chinese-inspired design, located near the Svisloch River and city center.','Beijing',36,'Čyrvonaarmiejskaja Street','Brest','Belarus','220030','+375 17 329-77-77','info@beijinghotelminsk.com','14:00:00','12:00:00');
+
+            INSERT INTO amenities (hotel_id,amenity) VALUES
+            (1,'Free parking'),
+            (1,'Free WiFi'),
+            (1,'Non-smoking rooms'),
+            (1,'Concierge'),
+            (1,'On-site restaurant'),
+            (1,'Fitness center'),
+            (1,'Pet-friendly rooms'),
+            (1,'Room service'),
+            (1,'Business center'),
+            (1,'Meeting rooms'),
+            (2,'Spa'),
+            (2,'Fitness center'),
+            (2,'Free WiFi'),
+            (2,'Restaurant'),
+            (2,'Conference rooms'),
+            (2,'Room service'),
+            (3,'Indoor pool'),
+            (3,'Spa'),
+            (3,'Free parking'),
+            (3,'Chinese restaurant'),
+            (3,'Fitness center'),
+            (3,'Business lounge');
+        </sql>
     </changeSet>
 </databaseChangeLog>

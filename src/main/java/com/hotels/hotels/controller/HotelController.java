@@ -25,6 +25,10 @@ import com.hotels.hotels.model.entity.Hotel;
 import com.hotels.hotels.model.service.Histogram;
 import com.hotels.hotels.model.service.HotelService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
@@ -37,6 +41,9 @@ public class HotelController {
     private HotelService service;
 
     @GetMapping("/hotels")
+    @Tag(name = "get", description = "get methods")
+    @Operation(summary = "Short info about hotels", description = "Response - json with all hotels (short info)")
+    @ApiResponse(responseCode = "200", description = "return current hotels from database")
     @Loggable
     public List<HotelShortInfo> getAllHotels() {
         return service
@@ -47,6 +54,13 @@ public class HotelController {
     }
 
     @GetMapping("/hotels/{id}")
+    @Tag(name = "get", description = "get methods")
+    @Operation(summary = "Full information about hotel", description = "Response - json with info about hotel by its id")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "return hotel by id (existed)"),
+        @ApiResponse(responseCode = "400", description = "invalid input id"),
+        @ApiResponse(responseCode = "404", description = "hotel does not exist")
+    })
     @Loggable
     public ResponseEntity<Hotel> getHotelById(
             @PathVariable @Positive(message = "invalid id: must be positive number") Long id) {
@@ -54,6 +68,12 @@ public class HotelController {
     }
 
     @GetMapping("/search")
+    @Tag(name = "get", description = "get methods")
+    @Operation(summary = "Search hotels by parameters", description = "You can build search request with different parameters (name, brand, city, country, amenities)")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "return hotels by parameters"),
+        @ApiResponse(responseCode = "400", description = "invalid input parameters")
+    })
     @Loggable
     public List<HotelShortInfo> getHotelsByParameters(@RequestParam Optional<String> name,
             @RequestParam Optional<String> brand, @RequestParam Optional<String> city,
@@ -66,6 +86,12 @@ public class HotelController {
     }
 
     @GetMapping("/histogram/{param}")
+    @Tag(name = "get", description = "get methods")
+    @Operation(summary = "Makes histogram based on input parameter", description = "Response - json with histogram by parameter")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "return histogram by parameter"),
+        @ApiResponse(responseCode = "400", description = "invalid histogram parameter")
+    })
     @Loggable
     public Map<String, Long> makeHistogramByParameter(@PathVariable Histogram.Type param) {
         return HistogramDto
@@ -74,6 +100,12 @@ public class HotelController {
     }
 
     @PostMapping("/hotels")
+    @Tag(name = "post", description = "post methods")
+    @Operation(summary = "Create hotel", description = "Provide json with new hotel info")
+    @ApiResponses({
+        @ApiResponse(responseCode = "201", description = "hotel created and return short info (include generated id)"),
+        @ApiResponse(responseCode = "400", description = "invalid hotel parameters or hotel with these parameters exists")
+    })
     @Loggable
     public ResponseEntity<HotelShortInfo> createHotel(@RequestBody @Valid NewHotelDto newHotelDto) {
         HotelShortInfo hotel = HotelShortInfo.fromHotel(service.createHotel(newHotelDto.toHotel()));
@@ -88,6 +120,13 @@ public class HotelController {
     }
 
     @PostMapping("/hotels/{id}/amenities")
+    @Tag(name = "post", description = "post methods")
+    @Operation(summary = "Add amenities to existed hotel", description = "Replace amenities for existed hotel")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "amenities were added to the hotel"),
+        @ApiResponse(responseCode = "400", description = "invalid hotel id or amenities"),
+        @ApiResponse(responseCode = "404", description = "hotel does not exists")
+    })
     @Loggable
     public ResponseEntity<?> addAmenitiesToHotel(
             @PathVariable @Positive(message = "invalid id: must be positive number") Long id,

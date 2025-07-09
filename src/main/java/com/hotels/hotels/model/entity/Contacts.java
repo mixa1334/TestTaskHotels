@@ -1,5 +1,7 @@
 package com.hotels.hotels.model.entity;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.Email;
@@ -8,14 +10,15 @@ import jakarta.validation.constraints.Pattern;
 
 @Embeddable
 public class Contacts {
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 200)
     @NotBlank
     @Pattern(regexp = "^\\+375\\s(17|29|44|33|25)\\s\\d{3}-\\d{2}-\\d{2}$")
     private String phone;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 200)
     @NotBlank
     @Email
+    @Length(max = 200)
     private String email;
 
     public Contacts(@NotBlank String phone, @NotBlank String email) {
