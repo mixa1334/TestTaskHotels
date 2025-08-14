@@ -93,4 +93,14 @@ public class BasicHotelService implements HotelService {
             throw new IllegalArgumentException("hotel with same email exists");
         }
     }
+
+    @Override
+    @Loggable
+    public boolean deleteHotelById(Long id) {
+        boolean exists = hotelRepository.existsById(id);
+        if (exists) {
+            hotelRepository.deleteById(id);
+        }
+        return exists;
+    }
 }

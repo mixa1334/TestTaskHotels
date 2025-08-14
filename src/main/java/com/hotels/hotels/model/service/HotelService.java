@@ -15,6 +15,8 @@ public interface HotelService {
 
     Hotel createHotel(Hotel hotel);
 
+    boolean deleteHotelById(Long id);
+
     boolean addAmenitiesToHotel(Long id, String[] amenities);
 
     List<Histogram> makeHistogramByParameter(Histogram.Type parameter);
